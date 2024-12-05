@@ -22,7 +22,6 @@ import {
   CollapsibleContent,
   CollapsibleTrigger,
 } from "~/components/ui/collapsible";
-
 const DynamicReactSelect = dynamic(
   () => import("~/components/ui/react-select"),
   { ssr: false },
@@ -217,10 +216,9 @@ export default function ClientSideOccupationGraphPage() {
             null
           }
           onChange={(e) => {
-            if (e) {
-              if (e.value) {
-                setCurrentSelectedNode(e.value);
-              }
+            const selectedOption = Array.isArray(e) ? e[0] : e;
+            if (selectedOption?.value) {
+              setCurrentSelectedNode(selectedOption.value);
             }
           }}
         />
